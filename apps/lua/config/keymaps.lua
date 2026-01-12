@@ -236,5 +236,5 @@ vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", { desc = "Code
 vim.keymap.set("n", "<leader>cr", "<cmd>Lspsaga rename<cr>", { desc = "Rename" })
 
 -- Terminal Flottant (Lspsaga en propose un très léger)
-vim.keymap.set({ "n", "t" }, "<A-d>", "<cmd>Lspsaga term_toggle<cr>", { desc = "Floating Term" })
-vim.keymap.set({ "n", "t" }, "<leader>t", "<cmd>Lspsaga term_toggle<cr>", { desc = "Floating Term" })
+-- vim.keymap.set({ "n", "t" }, "<A-d>", "<cmd>Lspsaga term_toggle<cr>", { desc = "Floating Term" })
+-- vim.keymap.set({ "n", "t" }, "<leader>t", "<cmd>Lspsaga term_toggle<cr>", { desc = "Floating Term" })
