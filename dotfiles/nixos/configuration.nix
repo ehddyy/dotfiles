@@ -1,0 +1,129 @@
+{ config, pkgs, ... }:
+
+{
+  imports = [ <nixpkgs/nixos/modules/installer/virtualbox-demo.nix> ];
+
+  # Let demo build as a trusted user.
+  # nix.settings.trusted-users = [ "demo" ];
+
+  # Mount a VirtualBox shared folder.
+  # This is configurable in the VirtualBox menu at
+  # Machine / Settings / Shared Folders.
+  # fileSystems."/mnt" = {
+  #   fsType = "vboxsf";
+  #   device = "nameofdevicetomount";
+  #   options = [ "rw" ];
+  # };
+
+  # By default, the NixOS VirtualBox demo image includes SDDM and Plasma.
+  # If you prefer another desktop manager or display manager, you may want
+  # to disable the default.
+  # services.xserver.desktopManager.plasma5.enable = lib.mkForce false;
+  # services.displayManager.sddm.enable = lib.mkForce false;
+  # Enable GDM/GNOME by uncommenting above two lines and two lines below.
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
+
+  # Experimental features
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
+  # Set your time zone.
+  time.timeZone = "Europe/Amsterdam";
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  fonts.packages = with pkgs; [
+    (nerdfonts.override {
+      fonts = [
+        "FiraCode"
+        "DroidSansMono"
+        "NerdFontsSymbolsOnly"
+      ];
+    })
+    font-awesome
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    liberation_ttf
+  ];
+
+  #  List packages installed in system profile. To search, run:
+  # \$ nix search wget
+  environment.systemPackages = with pkgs; [
+    alacritty
+    awscli2
+    bat
+    fzf
+    git
+    htop
+    home-manager
+    jq
+    kubectl
+    kubectx
+    lf
+    nerdfonts
+    oh-my-zsh
+    openssl
+    python310
+    screen
+    unzip
+    vim
+    wget
+    zellij
+    zip
+    zsh
+
+    google-chrome
+    # libreoffice
+    # slack
+    # spotify
+    sublime3
+    # vscode
+  ];
+
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
+
+  services.displayManager.defaultSession = "none+i3";
+  services.xserver = {
+    enable = true;
+    xkb = {
+      options = "caps:escape";
+      layout = "fr"; # ou la disposition de clavier que tu utilises
+    };
+    desktopManager = {
+      xterm.enable = false;
+      xfce = {
+        enable = true;
+      };
+    };
+    #  windowManager.i3 = {
+    #    enable = true;
+
+    #  };
+    # Use i3 config in plain text from this exemple
+    # https://github.com/lontivero/my-nixos-configuration/blob/master/configuration.nix
+
+    windowManager.i3 = {
+      enable = true;
+      package = pkgs.i3-gaps;
+      extraPackages = with pkgs; [
+        dmenu
+        i3status
+        i3lock
+        i3blocks
+        rofi
+      ];
+      configFile = "/etc/i3.conf";
+    };
+  };
+  environment.etc."i3.conf".text = pkgs.callPackage /home/demo/.config/home-manager/home/i3-config.nix { };
+
+}
+

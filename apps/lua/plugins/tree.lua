@@ -1,0 +1,38 @@
+return {} -- Handled with snacks.lua
+-- 	"nvim-neo-tree/neo-tree.nvim",
+-- 	branch = "v2.x", -- Utilise la branche v2.x
+-- 	dependencies = {
+-- 		"nvim-lua/plenary.nvim", -- Dépendance nécessaire
+-- 		"nvim-tree/nvim-web-devicons", -- Dépendance pour les icônes
+-- 		"MunifTanjim/nui.nvim", -- Dépendance pour les icônes
+-- 	},
+-- 	config = function()
+-- 		require("neo-tree").setup({
+-- 			close_if_last_window = true, -- Ferme neo-tree quand c'est la dernière fenêtre
+-- 			popup_border_style = "rounded", -- Style de bordure des fenêtres popup
+-- 			filesystem = {
+-- 				filtered_items = {
+-- 					visible = true, -- Montre tous les fichiers
+-- 					hide_dotfiles = false, -- Ne cache pas les fichiers commençant par un point
+-- 					hide_gitignored = false,
+-- 				},
+-- 				follow_current_file = true, -- Suivre le fichier actuellement ouvert
+-- 				hijack_netrw = true, -- Remplace netrw pour l'exploration des fichiers
+-- 				-- Bind neo-tree root to vim cwd
+-- 				bind_to_cwd = true, -- true creates a 2-way binding between vim's cwd and neo-tree's root
+-- 				cwd_target = {
+-- 					sidebar = "tab", -- sidebar is when position = left or right
+-- 					current = "window", -- current is when position = current
+-- 				},
+-- 			},
+-- 			window = {
+-- 				width = 30, -- Largeur de la fenêtre Neo-tree
+-- 				mappings = {
+-- 					["l"] = "open", -- Touche pour ouvrir les fichiers/dossiers
+-- 					["h"] = "close_node", -- Touche pour fermer les dossiers
+-- 					["<CR>"] = "open", -- Entrée pour ouvrir un fichier
+-- 				},
+-- 			},
+-- 		})
+-- 	end,
+-- }

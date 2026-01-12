@@ -1,0 +1,45 @@
+[theme]
+theme = "solarized-dark"
+
+[[block]]
+block = "memory"
+format = "    $mem_used_percents.eng(w:1) "
+format_alt = "    $swap_free.eng(w:3,u:B,p:Mi)/$swap_total.eng(w:3,u:B,p:Mi)($swap_used_percents.eng(w:2)) "
+interval = 30
+warning_mem = 70
+critical_mem = 90
+# [block.theme_overrides]
+# idle_bg = "#53a0ec"
+
+[[block]]
+block = "cpu"
+interval = 1
+[block.icons_overrides]
+icon = " 󰍛 "
+[[block.click]]
+button = "left"
+cmd = "exec plasma-systemmonitor"
+
+# [[block]]
+# block = "disk_space"
+# info_type = "available"
+# alert_unit = "GB"
+# alert = 10.0
+# warning = 15.0
+# format_alt = " $icon $available / $total "
+# format = " $icon $available "
+
+[[block]]
+block = "time"
+interval = 5
+[block.format]
+full = "    $timestamp.datetime(f:'%Y-%m-%d %H:%M:%S ', l:fr_BE) "
+short = "  $timestamp.datetime(f:%R) "
+
+[[block]]
+block = "custom"
+command = "echo \uf011" # assumes fontawesome icons
+interval = "once"
+[[block.click]]
+button = "left"
+cmd = "systemctl `echo -e 'suspend\npoweroff\nreboot' | dmenu`"

@@ -1,0 +1,91 @@
+layout {
+    // Default new tab template
+	default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+	pane_template name="panel" {
+        pane split_direction="Vertical" {
+            children
+        }
+    }
+    tab_template name="strider_tab" {
+        pane size=1 {
+            plugin location="zellij:tab-bar"
+        }
+        pane split_direction="Vertical" {
+            children
+        }
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+	tab_template name="default" {
+        pane size=1 {
+            plugin location="zellij:tab-bar"
+        }
+        pane split_direction="Vertical" {
+            children
+
+        }
+    }
+
+    tab name="VM" cwd="~/dev/dwh"  {
+        panel split_direction="vertical" {
+            pane command="clickhouse-client" start_suspended=true {
+                args "-h" "51.158.114.192" "-u" "default" "--password" "WGwbLFjIGdyXIBLs%"
+            }
+            pane command="ssh" start_suspended=true {
+                args "root@51.158.114.192"
+            }
+            
+        }
+    }
+
+    tab name="DWH" cwd="~/dev/dwh"  focus=true{
+        panel split_direction="vertical" {
+            pane cwd="~/dev/dwh" size="60%"
+            pane split_direction="horizontal"{
+                pane cwd="~/dev/dwh" command="docker-compose" start_suspended=true {
+                    args "up" 
+                }
+                pane command="docker-compose" size="70%"{
+                    args "exec" "click_server" "clickhouse-client"
+                }
+            }
+            
+        }
+    }
+		
+    tab name="k8s" cwd="~/dev/"{
+        panel split_direction="vertical" {
+			pane cwd="~/dev" size="60%"
+            
+            pane name="Watch pods" split_direction="horizontal"{
+                pane cwd="~/dev/" command="watch" size="60%" start_suspended=true {
+                    args "kubectl" "get" "pods"
+                }
+                pane cwd="~/dev/"  
+            }       
+        }
+	}
+
+    tab name="backend" cwd="~/dev"  {
+        panel split_direction="vertical" {
+            panel split_direction="vertical" size="60%"{
+                pane 
+            } 
+            pane split_direction="horizontal" {
+                pane cwd="~/dev" {
+                }
+                pane 
+            }
+            
+        }
+    }
+}
