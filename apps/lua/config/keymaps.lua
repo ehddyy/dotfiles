@@ -147,8 +147,8 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
 -- Lazy Git
 -----------------------------------------------------------------
 vim.keymap.set("n", "<leader>gg", function()
-	_G.Snacks.lazygit({ cwd = _G.LazyVim.root.git() })
-end, { desc = "Lazygit (Root Dir)" })
+	Snacks.lazygit.open()
+end, { desc = "Lazygit" })
 vim.keymap.set("n", "<leader>gb", function()
 	_G.Snacks.git.blame_line()
 end, { desc = "Git Blame Line" })
